@@ -255,9 +255,9 @@ The reason for these differences is that both versions of the script (the hard�
 
 ### 14: The structure of the Pandoc command
 
-*Answer* (options and arguments, and what each does):
+*Answer* (options and arguments, and what each does):The command pandoc -o README.pdf README.md consists of the program name (pandoc), one option (-o), the option’s argument (README.pdf), and one positional argument (README.md).
 
-*Answer* (how does Pandoc know which output format to produce?):
+*Answer* (how does Pandoc know which output format to produce?):  The -o option tells Pandoc where to write the output. Pandoc knows to produce a PDF because the output file name ends in .pdf.
 
 ### 15: Render your README to PDF and HTML
 
@@ -268,16 +268,19 @@ pandoc -o README.pdf README.md
 - Command to render to HTML:
 
 ```bash
-# Your command:
+# Your command:pandoc -o README.html README.md
+
 ```
 
 ### 16: Should the rendered files be committed?
 
-*Answer*: Should the rendered files be committed to your Git repo? Why/why not?
+*Answer*: Should the rendered files be committed to your Git repo? Why/why not? 
+No. Rendered files like PDF and HTML are build artifacts that can be regenerated at any time from the Markdown source. They don’t belong in version control and would create unnecessary, noisy commits.
 
 ### 17: Install the PDF Viewer extension and view the PDF
 
 *Answer*: One observation about the rendered PDF file:
+When I opened the rendered README.pdf in VS Code using the PDF Viewer extension, I noticed that the headings were larger and more spaced out than they appear in the Markdown preview. The PDF also added extra spacing before code blocks, which I had expected.
 
 ## Part E: Publish your repo on GitHub
 
