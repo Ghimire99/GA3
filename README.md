@@ -135,7 +135,8 @@ Finished
 
 *Answer*: Which output (if any) differed from your prediction, and why?
 ```
-
+None of the outputs differed from my predictions.
+All four commands behaved exactly as expected based on how Bash handles positional parameters, quoting, and glob expansion.
 ```
 
 ### 6: Write the `printline.sh` script
@@ -225,7 +226,8 @@ Yes, it matches what I expected. I previously ran FastQC on 44 FASTQ files, so I
 
 <!-- No need to paste the script: we'll look at scripts/multiqc.sh and its Git history directly. -->
 
-Code to rerun the script:
+Code to rerun the script: bash scripts/multiqc.sh results/fastqc results/multiqc
+
 
 ```bash
 # Your command:2: bash scripts/multiqc.sh results/fastqc results/multiqc
@@ -237,7 +239,11 @@ Code to rerun the script:
 ### 13: Differences between the two MultiQC runs
 
 ```
-*Answer*: Yes, there were differences between the first and second MultiQC runs. In the second run, MultiQC printed a message saying that existing reports were found in the output directory, and it added suffixes (_1) to the new output files:
+*Answer*: 
+Yes, there were differences between the first and second MultiQC runs.
+In the second run, MultiQC printed an extra message saying that existing reports were found in the output directory and that it would add suffixes to avoid overwriting. This message did not appear in the first run.
+
+It also added suffixes (_1) to the new output files:
 
 multiqc_data_1
 
@@ -245,7 +251,7 @@ multiqc_report_1.html
 
 This did not happen in the first run.
 
-The reason for these differences is that both versions of the script (the hard‑coded version and the argument‑accepting version) wrote their results to the same directory, results/multiqc. When MultiQC detects that the directory already contains a previous report, it avoids overwriting those files by automatically adding suffixes to the new ones. This is expected behavior and is caused by running MultiQC twice with the same output directory
+The reason for these differences is that both versions of the script (the hard‑coded version and the argument‑accepting version) wrote their results to the same directory, results/multiqc. When MultiQC detects that the directory already contains a previous report, it avoids overwriting those files by automatically adding suffixes to the new ones. This is expected behavior and is caused by running MultiQC twice with the same output directory.
 ```
 
 
@@ -302,21 +308,34 @@ When I opened the rendered README.pdf in VS Code using the PDF Viewer extension,
 
 ### 21: Explore the MultiQC report
 
-*Answer* (one insight you gained):
+*Answer* (one insight you gained):  
+From exploring the MultiQC report, I noticed that the per‑base sequence quality plots look very similar to the FastQC plots we learned about in Week 07. Most samples show high quality scores across all positions, which matches the “good” quality profile described in the lecture. MultiQC makes this easier to see because all samples are plotted together, and hovering over each line shows the sample ID. This helped me quickly confirm that the majority of samples have consistently strong sequencing quality.
 
-*Answer* (one thing you're confused about):
+*Answer* (one thing you're confused about):  
+One thing I’m still unsure about is how MultiQC decides which FastQC warnings to display or emphasize. In Week 07, we learned how FastQC assigns PASS/WARN/FAIL statuses for modules like adapter content, GC content, and overrepresented sequences. But in MultiQC, some warnings seem more prominent than others, and I’m not completely sure how MultiQC aggregates or prioritizes these FastQC flags. I would like to learn more about how MultiQC summarizes these results and how it decides what to highlight.
 
 ### 22: Pandoc versions
 
 ```bash
 # Your command:
+pandoc -v
+
 ```
 
 The output of the command(s) was:
 
-```         
+```  pandoc 2.14.0.3
+Compiled with pandoc-types 1.22.1, texmath 0.12.3.3, skylighting 0.10.5.2,
+citeproc 0.4.0.1, ipynb 0.1.0.1
+User data directory: /users/PAS3493/ghimire75/.local/share/pandoc
+Copyright (C) 2006-2021 John MacFarlane.
+
 ```
 
-*Answer*: Is the Pandoc version available by default the most recent one?
+*Answer*: Is the Pandoc version available by default the most recent one?  
+No.
+The default version on OSC is Pandoc 2.14.0.3, which is from 2021.
+The most recent releases are in the Pandoc 3.x series, so the default version is not the newest.
 
-*Answer*: Which Pandoc version are you using after loading the module?
+*Answer*: Which Pandoc version are you using after loading the module?  
+I am using Pandoc 3.6.4 after loading the module.
